@@ -9,7 +9,11 @@ This is a work in progress. Emphasis on interactive data visualization and journ
 - See what happens when you change some of the colors or numbers and click *Run* on this [online code editor with SVG graphics](http://jsfiddle.net/g8opryxy/)
 - Feel free to change color or number values in HTML or JavaScript code in this [example using D3.js library](http://jsfiddle.net/toqu5f52/)
 
-## Opening and editing examples on your own computer
+## Examples
+
+This repository contains [examples](./examples) like [this one about SVG graphics](./examples/01_svg).
+
+### Opening and editing examples on your computer
 
 Download a copy of this repository on your computer as a [zip file](https://github.com/vjuutilainen/coding-workshops/archive/master.zip), extract the archive and navigate through *coding-workshops-master/examples/01_svg/* to find an *index.html* file to open SVG graphics in your browser. Then open the same file in a text editor (see Tools section below), change some color or number values, and refresh your browser to see the results.
 
