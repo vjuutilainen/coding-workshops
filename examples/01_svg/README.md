@@ -22,4 +22,5 @@ SVG is a markup language defining vector-based graphics.
 - `<defs>` (define objects for reuse)
 
 ## Reference
+
 - [SVG element reference](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
