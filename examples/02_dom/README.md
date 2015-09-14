@@ -15,12 +15,12 @@ window.onload = function() {
 
 ```
 
-The DOM also provides us the `document.getElementsByTagName` method, which is this case gives us a collection of found elements with the tag `body`. We store the first (and only) element as a variable named `elem` and set its style attribute. 
+The DOM also provides us the `document.getElementsByTagName` method, which is this case gives us a collection of elements with the tag `body`. We store the first (and only) element as a variable named `elem` and set its style attribute. 
 
-We could also access the body element by other methods, like `document.querySelectorAll`. There are also many external JavaScript libraries which make it easier to work with the DOM.
+We can access the body element by other methods as well, like `document.querySelectorAll`. There are also many external JavaScript libraries which make it easier to work with the DOM.
 
 # Reference
  
-[Web API Interfaces – Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
-[Web API Interfaces – Document](https://developer.mozilla.org/en-US/docs/Web/API/document)
-[Web API Interfaces – HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
+- [Web API Interfaces – Window](https://developer.mozilla.org/en-US/docs/Web/API/Window)
+- [Web API Interfaces – Document](https://developer.mozilla.org/en-US/docs/Web/API/document)
+- [Web API Interfaces – HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
