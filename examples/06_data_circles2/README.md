@@ -1,3 +1,3 @@
-# Joining selections to data, part 2
+# Circles with data
 
-In this example we create graphic elements to represent data. The difference from previous example is that this time the length of the data changes.
+Creating graphic elements to represent data, using D3 methods `select`, `append` and `enter`. In this example the data changes when user clicks the window and `exit` method is needed to remove elements which don't have matching data.

@@ -1,82 +1,75 @@
+
 window.onload = function() {
 
-  // This is the data we will be joining
-  var circleData = [10, 20, 30, 40, 50]; 
+  // Color scheme from colorbrewer2.org
+  var colors = ['rgb(102,194,165)', 'rgb(252,141,98)', 'rgb(141,160,203)', 'rgb(231,138,195)', 'rgb(166,216,84)'];
 
-  // Create an empty SVG container inside body and store it under a variable
-  var svg = d3.select('body').append('svg');
+  var dataForCircles = [1, 2, 3, 4, 5];
 
-  // Set the size of the SVG container by setting multiple attributes at once
-  svg.attr({
-    width: 800,
-    height: 640
-  });
+  var circlesSelection = d3.select('body')
+                            .append('svg')
+                            .attr({
+                              width: 500,
+                              height: 200
+                            })
+                            .selectAll('circle')
+                            .data(dataForCircles)
+                            .enter()
+                            .append('circle')
+                            .attr({
+                              r: function(d, i) { return d * 10; },
+                              cx: function(d, i) { return 50 + i * 100; },
+                              fill: function(d, i) { return colors[d - 1]; }, // get color for a certain value, reduce value by one to get color index
+                              cy: 100
+                            });
 
-  // We are making a selection of all circles inside SVG (there isn't any yet) and giving the data for them
-  // Normally the data is joined by index, but now we want to use the radius value as the key
-  var circles = svg.selectAll('circle')
-                    .data(circleData, function(d) { return d; });          
+  // This is a function which changes the data of the circles
   
-  // We now have a special enter selection for all the elements that don't exist yet.
-  // We use it to create circles
-  circles.enter()
-      .append('circle');    
+  var changeData = function() {
 
-  // Now the circles are part of our selection and can be updated without entering.
-  //This time we set x coordinates and y coordinates based on selection's index and add some padding
-  circles
-    .attr('cx', function(d, i) { return 50 + (i * 100); })
-    .attr('cy', 100);
-
-  // Lets finally animate their sizes by making a special transition selection and setting a duration for changes
-  // We need to give the starting value for radius
-  circles
-    .attr('r', 0)
-    .transition()
-    .duration(1000)
-    .attr('r', function(d, i) {
-      return d;
-    });
-
-  // Here we add some interactivity
-  window.onclick = function() {
-
-    console.log('clicked');
-    
     // This piece of code creates random arrays
-    var arr = [];
-    for(var c = 0; c < Math.floor(Math.random() * 5) + 1; c++){ arr.push(Math.random() * 50); }
+    // The length and values of data are randomly changed between 1–5 
+    var randomDataForCircles = [];
+    for(var c = 0; c < Math.floor(Math.random() * 5) + 1; c++){ randomDataForCircles.push(Math.floor(Math.random() * 5) + 1); }
 
-    // Let's replace the circle data with our random array
-    circleData = arr; 
+    circlesSelection = circlesSelection.data(randomDataForCircles);
 
-    // We join the new data and update our variable with the radius value as the key
-    circles = circles.data(circleData, function(d) { return d; });
+    // We want the removed circles to be moved out of the way
+    // We place the D3 transition method with a duration before setting the cy attribute
+    // The each method allows us to remove the element when the animation has ended
+    circlesSelection.exit()
+                    .transition()
+                    .duration(500)
+                    .attr('cy', -100)
+                    .each('end', function() {
+                      d3.select(this).remove();
+                    });
 
-    // Let's do this in different order now
-    // There will also be elements that don't have data anymore to represent, so we remove those using special exit selection
-    // Let's move this away first
-    circles.exit()
-            .transition()
-            .duration(1000)
-            .attr('cy', -100)
-            .each('end', function(d, i) {
-              d3.select(this).remove();
-            });
+    // We want the old elements to just resize after the removing of the old elements is done, we do this now by setting a delay
+    // Note we do this before adding any new elements
+    circlesSelection.transition()
+                .delay(500)
+                .duration(500)
+                .attr('r', function(d, i) { return d * 10; });
 
-    // There will be new data that don't have corresponding elements, so we use the special enter selection to create those
-    circles.enter()
-          .append('circle')
-          .attr('cx', function(d, i) { return 50 + (i * 100); })
-          .attr('cy', 100);
+    // Finally we animate the new elements to grow from zero radius
+    // Note we first set the values that are not animated
+    circlesSelection.enter()
+                    .append('circle')
+                    .attr({
+                      cx: function(d, i) { return 50 + i * 100; },
+                      fill: function(d, i) { return colors[d - 1]; },
+                      cy: 100,
+                      r: 0
+                    })
+                    .transition() 
+                    .delay(1000)
+                    .duration(500)
+                    .attr('r', function(d, i) { return d * 10; });
 
-    // Then for all the items we set the radius based on new data, let's animate those like in the beginning
-    circles.attr('r', 0)
-            .transition()
-            .duration(1000)
-            .attr('r', function(d, i) {
-              return d;
-            });
   };
+  
+  // Run our function every 1000 milliseconds
+  window.setInterval(changeData, 1000);
 
 };

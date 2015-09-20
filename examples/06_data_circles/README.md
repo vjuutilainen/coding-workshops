@@ -1,3 +1,3 @@
-# Joining selections to data
+# Circles with data
 
-In this example we create graphic elements to represent data.
+Creating graphic elements to represent data, using D3 methods `select`, `append` and `enter`.

@@ -1,3 +1,3 @@
-# Joining selections to data, part 3
+# Circles with data
 
-In this example we create graphic elements to represent data. The difference from previous example is that this time we use animation and set keys for the data.
+Creating graphic elements to represent data, using D3 methods `select`, `append`, `enter` and `exit`. In this example we animate and style the circles, and run our code using a time interval.
